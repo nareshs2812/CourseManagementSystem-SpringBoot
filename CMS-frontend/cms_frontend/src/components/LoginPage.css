@@ -1,0 +1,105 @@
+.login-wrapper {
+    display: flex;
+    height: 100vh;
+    font-family: 'Segoe UI';
+  }
+  
+  .login-left {
+    flex: 1;
+    background-color: #eaf4ff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .login-left h1 {
+    font-size: 2rem;
+    color: #222;
+    margin-bottom: 20px;
+  }
+  
+  .login-left img {
+    max-width: 300px;
+    width: 100%;
+  }
+
+  .login-right {
+    flex: 1;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-form {
+    width: 100%;
+    max-width: 360px;
+    padding: 32px;
+    border-radius: 8px;
+
+  }
+  
+  .login-form h2 {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+    color: #222;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #444;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+
+  .register-btn {
+    width: 100%;
+    margin-top: 16px;
+    padding: 12px;
+    background-color: transparent;
+    border: 2px solid #007bff;
+    color: #007bff;
+    font-weight: bold;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .register-btn:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  
