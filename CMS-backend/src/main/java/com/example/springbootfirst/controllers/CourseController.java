@@ -1,0 +1,43 @@
+package com.example.springbootfirst.controllers;
+
+import com.example.springbootfirst.models.Course;
+import com.example.springbootfirst.services.CourseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/courses")
+@CrossOrigin(origins = "http://localhost:3000")
+public class CourseController {
+
+    @Autowired
+    private CourseService courseService;
+
+    @GetMapping
+    public List<Course> getAllCourses() {
+        return courseService.getAllCourses();
+    }
+
+    @PostMapping
+    public Course addCourse(@RequestBody Course course) {
+        return courseService.addCourse(course);
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Course> getCourse(@PathVariable Long id) {
+        return courseService.getCourseById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Course updateCourse(@PathVariable Long id, @RequestBody Course course) {
+        return courseService.updateCourse(id, course);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteCourse(@PathVariable Long id) {
+        courseService.deleteCourse(id);
+    }
+}

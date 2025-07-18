@@ -30,7 +30,7 @@ public class SpringConfiguration {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/api/auth/**").permitAll(); // Public
+                    auth.requestMatchers("/api/auth/**", "/courses/**").permitAll(); // Public
                     auth.anyRequest().authenticated(); // All others protected
                 })
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

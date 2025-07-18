@@ -1,0 +1,85 @@
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #3498db;
+  --text-color: #333;
+  --light-bg: #f8f9fa;
+  --transition: all 0.3s ease;
+}
+
+.about-container {
+  min-height: 100vh;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: var(--text-color);
+}
+
+.about-header {
+  text-align: center;
+  padding: 4rem 0;
+  margin-bottom: 3rem;
+}
+
+.about-header h1 {
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  animation: fadeInDown 1s ease-out;
+}
+
+.about-header p {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  animation: fadeInUp 1s ease-out 0.3s;
+}
+
+.about-content {
+  background: var(--light-bg);
+  padding: 3rem 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  animation: slideIn 1s ease-out;
+}
+
+.about-section {
+  margin-bottom: 3rem;
+}
+
+.about-section h2 {
+      font-size: 2rem;
+  margin-bottom: 1.5rem;
+
+}
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+.feature {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+
+}
+
+.feature h3 {
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+}
+
+.contact-section {
+  text-align: center;
+  padding: 2rem 0;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.contact-info {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
