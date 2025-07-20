@@ -6,8 +6,8 @@ const Header = () => {
     <nav className="navbar">
       <div className="nav-logo">CourseSphere</div>
       <div className="nav-links">
-        <a href="/" className="">Home</a>
-        <a href="/">My Courses</a>
+        <a href="/courses" className="">Home</a>
+        <a href="/courses">My Courses</a>
         <a href="#contact">Contact</a>
         <a href="/">Logout</a>
       </div>
