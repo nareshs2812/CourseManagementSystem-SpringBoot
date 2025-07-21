@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Header';
-import '../styles/CourseListingPage.css'; // You can reuse the course styles
+import '../styles/CourseListingPage.css'; 
 import { toast } from 'react-toastify';
 
 const MyCourses = () => {

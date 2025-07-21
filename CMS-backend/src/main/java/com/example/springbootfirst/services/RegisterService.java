@@ -8,6 +8,8 @@ import com.example.springbootfirst.repository.RegisterDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -51,5 +53,10 @@ public class RegisterService {
         RegisterDetails user = userOptional.get();
         return passwordEncoder.matches(rawPassword, user.getPassword());
     }
+
+    public RegisterDetails findByUserName(String userName) {
+    return registerDetailsRepository.findByUserName(userName)
+            .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+}
 
 }

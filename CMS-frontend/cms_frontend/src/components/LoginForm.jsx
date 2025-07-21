@@ -31,6 +31,10 @@ const LoginForm = () => {
         throw new Error(data?.error || data || 'Login failed');
       }
 
+      localStorage.setItem('userId', data.userId);
+    localStorage.setItem('userName', data.userName);
+    if (data.token) localStorage.setItem('token', data.token);
+
       navigate('/courses');
     } catch (err) {
       setError(err.message);
