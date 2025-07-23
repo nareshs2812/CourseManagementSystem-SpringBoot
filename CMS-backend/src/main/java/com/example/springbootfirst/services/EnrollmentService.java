@@ -47,4 +47,14 @@ public class EnrollmentService {
     public List<Enrollment> getEnrollmentsByUser(RegisterDetails user) {
     return enrollmentRepository.findByUser(user); 
     }
+
+    public String deleteEnrollmentById(Long enrollmentId) {
+    if (enrollmentRepository.existsById(enrollmentId)) {
+        enrollmentRepository.deleteById(enrollmentId);
+        return "Enrollment deleted successfully!";
+    } else {
+        return "Enrollment not found!";
+    }
+}
+
 }

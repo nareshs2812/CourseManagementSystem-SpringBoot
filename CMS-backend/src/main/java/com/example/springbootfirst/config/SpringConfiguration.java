@@ -32,7 +32,7 @@ public class SpringConfiguration {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**", "/courses/**").permitAll()
-                .requestMatchers("/enrollments/**").hasAnyRole("USER", "ADMIN"),
+                .requestMatchers("/enrollments/**").permitAll()
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

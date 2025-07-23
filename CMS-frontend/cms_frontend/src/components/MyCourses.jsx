@@ -8,14 +8,17 @@ const MyCourses = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token');
 
-  useEffect(() => {
-    if (!userId) {
-      toast.error('Please log in to view your enrolled courses');
-      return;
-    }
-
-    fetch(`http://localhost:8080/enrollments/user/${userId}`)
+  const fetchEnrollments = () => {
+    setLoading(true);
+    fetch(`http://localhost:8080/enrollments/user/${userId}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);
@@ -31,7 +34,41 @@ const MyCourses = () => {
         setError(err.message);
         setLoading(false);
       });
-  }, [userId]);
+  };
+
+  useEffect(() => {
+    if (!userId || !token) {
+      toast.error('Please log in to view your enrolled courses');
+      setLoading(false);
+      return;
+    }
+
+    fetchEnrollments();
+  }, [userId, token]);
+
+  const handleDelete = (enrollmentId) => {
+    fetch(`http://localhost:8080/enrollments/${enrollmentId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Error deleting: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then((message) => {
+        toast.success(message);
+        fetchEnrollments(); // Refresh the list
+      })
+      .catch((err) => {
+        console.error('Delete error:', err);
+        toast.error("Failed to delete enrollment");
+      });
+  };
 
   return (
     <>
@@ -52,7 +89,12 @@ const MyCourses = () => {
                 <h3>{enrollment.course.title}</h3>
                 <p><strong>Instructor:</strong> {enrollment.course.instructorName}</p>
                 <p><strong>Duration:</strong> {enrollment.course.durationInHours} hrs</p>
-                <p><strong>Enrolled By:</strong> {enrollment.user.username}</p>
+                <button
+                  className="delete-button"
+                  onClick={() => handleDelete(enrollment.id)}
+                >
+                  Delete
+                </button>
               </div>
             ))}
           </div>
@@ -63,3 +105,4 @@ const MyCourses = () => {
 };
 
 export default MyCourses;
+ 

@@ -24,5 +24,10 @@ public String enrollUser(@RequestBody EnrollmentRequest request) {
 public List<Enrollment> getEnrollmentsByUser(@PathVariable Long userId) {
     return enrollmentService.getEnrollmentsForUser(userId);
 }
+@DeleteMapping("/{enrollmentId}")
+public String deleteEnrollment(@PathVariable Long enrollmentId) {
+    return enrollmentService.deleteEnrollmentById(enrollmentId);
+}
+
 
 }

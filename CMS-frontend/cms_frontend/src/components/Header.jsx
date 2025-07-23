@@ -7,7 +7,7 @@ const Header = () => {
       <div className="nav-logo">CourseSphere</div>
       <div className="nav-links">
         <a href="/courses" className="">Home</a>
-        <a href="/courses">My Courses</a>
+        <a href="/mycourses">My Courses</a>
         <a href="#contact">Contact</a>
         <a href="/">Logout</a>
       </div>
