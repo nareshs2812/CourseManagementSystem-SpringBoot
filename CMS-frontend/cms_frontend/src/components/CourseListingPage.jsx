@@ -87,6 +87,7 @@ const CourseListingPage = () => {
                 <h3>{course.title}</h3>
                 <p><strong>Instructor:</strong> {course.instructorName}</p>
                 <p><strong>Duration:</strong> {course.durationInHours} hrs</p>
+                <p><strong>Price:</strong> {course.coursePrice}</p>
                 <div className="course-actions">
                   <button className="course-btn">View Details</button>
                   <button 

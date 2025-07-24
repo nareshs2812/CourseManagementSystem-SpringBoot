@@ -62,7 +62,7 @@ const MyCourses = () => {
       })
       .then((message) => {
         toast.success(message);
-        fetchEnrollments(); // Refresh the list
+        fetchEnrollments();
       })
       .catch((err) => {
         console.error('Delete error:', err);
@@ -89,6 +89,7 @@ const MyCourses = () => {
                 <h3>{enrollment.course.title}</h3>
                 <p><strong>Instructor:</strong> {enrollment.course.instructorName}</p>
                 <p><strong>Duration:</strong> {enrollment.course.durationInHours} hrs</p>
+                <p><strong>Price:</strong> {enrollment.course.coursePrice}</p>
                 <button
                   className="delete-button"
                   onClick={() => handleDelete(enrollment.id)}

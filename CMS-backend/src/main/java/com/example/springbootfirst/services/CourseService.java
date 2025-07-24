@@ -36,6 +36,7 @@ public class CourseService {
             course.setDescription(updatedCourse.getDescription());
             course.setInstructorName(updatedCourse.getInstructorName());
             course.setDurationInHours(updatedCourse.getDurationInHours());
+            course.setCoursePrice(updatedCourse.getCoursePrice());
             return courseRepository.save(course);
         }).orElseThrow(() -> new RuntimeException("Course not found with id " + id));
     }

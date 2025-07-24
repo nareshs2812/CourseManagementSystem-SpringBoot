@@ -8,7 +8,7 @@ public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "course_id") // explicitly map to DB column
+    @Column(name = "course_id")
     private Long courseId;
 
     @Column(name = "title")
@@ -17,20 +17,24 @@ public class Course {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "instructor_name") // map to DB column
+    @Column(name = "instructor_name")
     private String instructorName;
 
-    @Column(name = "duration_in_hours") // map to DB column
+    @Column(name = "duration_in_hours")
     private int durationInHours;
+
+    @Column(name = "course_price")
+    private double coursePrice;
 
     public Course() {}
 
-    public Course(Long courseId, String title, String description, String instructorName, int durationInHours) {
+    public Course(Long courseId, String title, String description, String instructorName, int durationInHours, double coursePrice) {
         this.courseId = courseId;
         this.title = title;
         this.description = description;
         this.instructorName = instructorName;
         this.durationInHours = durationInHours;
+        this.coursePrice = coursePrice;
     }
 
     public Long getCourseId() {
@@ -39,29 +43,40 @@ public class Course {
     public void setCourseId(Long courseId) {
         this.courseId = courseId;
     }
+
     public String getTitle() {
         return title;
     }
     public void setTitle(String title) {
         this.title = title;
     }
+
     public String getDescription() {
         return description;
     }
     public void setDescription(String description) {
         this.description = description;
     }
+
     public String getInstructorName() {
         return instructorName;
     }
     public void setInstructorName(String instructorName) {
         this.instructorName = instructorName;
     }
+
     public int getDurationInHours() {
         return durationInHours;
     }
     public void setDurationInHours(int durationInHours) {
         this.durationInHours = durationInHours;
+    }
+
+    public double getCoursePrice() {
+        return coursePrice;
+    }
+    public void setCoursePrice(double coursePrice) {
+        this.coursePrice = coursePrice;
     }
 
     @Override
@@ -72,6 +87,7 @@ public class Course {
                 ", description='" + description + '\'' +
                 ", instructorName='" + instructorName + '\'' +
                 ", durationInHours=" + durationInHours +
+                ", coursePrice=" + coursePrice +
                 '}';
     }
 }

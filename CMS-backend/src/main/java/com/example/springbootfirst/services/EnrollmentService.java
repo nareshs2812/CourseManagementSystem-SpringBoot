@@ -8,6 +8,7 @@ import com.example.springbootfirst.repository.EnrollmentRepository;
 import com.example.springbootfirst.repository.RegisterDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -33,28 +34,30 @@ public class EnrollmentService {
 
         Enrollment enrollment = new Enrollment(userOpt.get(), courseOpt.get());
         enrollmentRepository.save(enrollment);
-
         return "Enrollment successful!";
     }
 
     public List<Enrollment> getEnrollmentsForUser(Long userId) {
         RegisterDetails user = registerRepository.findById(userId.intValue())
-            .orElseThrow(() -> new RuntimeException("User not found"));
-
+                .orElseThrow(() -> new RuntimeException("User not found"));
         return enrollmentRepository.findByUser(user);
     }
 
     public List<Enrollment> getEnrollmentsByUser(RegisterDetails user) {
-    return enrollmentRepository.findByUser(user); 
+        return enrollmentRepository.findByUser(user);
     }
 
     public String deleteEnrollmentById(Long enrollmentId) {
-    if (enrollmentRepository.existsById(enrollmentId)) {
-        enrollmentRepository.deleteById(enrollmentId);
-        return "Enrollment deleted successfully!";
-    } else {
-        return "Enrollment not found!";
+        if (enrollmentRepository.existsById(enrollmentId)) {
+            enrollmentRepository.deleteById(enrollmentId);
+            return "Enrollment deleted successfully!";
+        } else {
+            return "Enrollment not found!";
+        }
     }
+
+    public List<Enrollment> getAllEnrollments() {
+    return enrollmentRepository.findAll();
 }
 
 }
