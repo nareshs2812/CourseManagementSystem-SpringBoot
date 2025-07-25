@@ -25,16 +25,20 @@ public class Course {
 
     @Column(name = "course_price")
     private double coursePrice;
+    
+    @Column(name = "instructor_id")
+    private Long instructorId;
 
     public Course() {}
 
-    public Course(Long courseId, String title, String description, String instructorName, int durationInHours, double coursePrice) {
+    public Course(Long courseId, String title, String description, String instructorName, int durationInHours, double coursePrice, Long instructorId) {
         this.courseId = courseId;
         this.title = title;
         this.description = description;
         this.instructorName = instructorName;
         this.durationInHours = durationInHours;
         this.coursePrice = coursePrice;
+        this.instructorId = instructorId;
     }
 
     public Long getCourseId() {
@@ -78,6 +82,14 @@ public class Course {
     public void setCoursePrice(double coursePrice) {
         this.coursePrice = coursePrice;
     }
+
+    public Long getInstructorId() {
+        return instructorId;
+    }
+    public void setInstructorId(Long instructorId) {
+        this.instructorId = instructorId;
+    }
+
 
     @Override
     public String toString() {

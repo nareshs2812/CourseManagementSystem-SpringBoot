@@ -30,6 +30,10 @@ public class CourseService {
         courseRepository.deleteById(id);
     }
 
+    public List<Course> getCoursesByInstructorId(Long instructorId) {
+        return courseRepository.findByInstructorId(instructorId);
+    }
+
     public Course updateCourse(Long id, Course updatedCourse) {
         return courseRepository.findById(id).map(course -> {
             course.setTitle(updatedCourse.getTitle());

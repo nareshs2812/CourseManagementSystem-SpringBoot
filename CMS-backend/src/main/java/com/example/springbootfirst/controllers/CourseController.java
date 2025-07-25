@@ -40,4 +40,10 @@ public class CourseController {
     public void deleteCourse(@PathVariable Long id) {
         courseService.deleteCourse(id);
     }
+
+    @GetMapping("/createdBy/{instructorId}")
+    public List<Course> getCoursesByInstructor(@PathVariable Long instructorId) {
+        return courseService.getCoursesByInstructorId(instructorId);
+    }
+
 }

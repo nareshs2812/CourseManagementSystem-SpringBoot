@@ -7,6 +7,10 @@ import Header from './components/Header';
 import AboutUs from './components/AboutUs';
 import CourseListingPage from './components/CourseListingPage';
 import MyCourses from './components/MyCourses';
+import AdminHome from './components/AdminHome';     
+import AdminHeader from './components/AdminHeader';
+import AdminCourse from './components/AdminCourse';
+import AddCourse from './components/AddCourse';
 
 
 function App() {
@@ -20,6 +24,10 @@ function App() {
         <Route path="/courses" element={<CourseListingPage />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/mycourses" element={<MyCourses />} />
+        <Route path="/adminheader" element={<AdminHeader />} />
+        <Route path="/adminhome" element={<AdminHome />} />
+        <Route path="/admincourse" element={<AdminCourse />} />
+        <Route path="/addcourse" element={<AddCourse />} />
       </Routes>
     </Router>
   );

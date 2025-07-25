@@ -23,36 +23,41 @@ const LoginForm = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
-  
+
       const contentType = res.headers.get('content-type');
       const data = contentType?.includes('application/json') ? await res.json() : await res.text();
-  
+
       if (!res.ok) {
         throw new Error(data?.error || data || 'Login failed');
       }
-  
-      // Store required values
+
       localStorage.setItem('userId', data.userId);
       localStorage.setItem('userName', data.userName);
       if (data.token) localStorage.setItem('token', data.token);
-      if (data.role) localStorage.setItem('role', data.role);
-  
-      // Navigate based on role
-      if (data.role === 'ADMIN') {
-        localStorage.setItem('role', data.role);
-        navigate('/adminhome');
-      } else if (data.role === 'USER') {
-        navigate('/courses');
+
+      const roleName = data.roles && Array.isArray(data.roles) && data.roles.length > 0
+        ? data.roles[0].name
+        : null;
+
+      if (roleName) {
+        localStorage.setItem('role', roleName);
+        if (roleName === 'ROLE_ADMIN') {
+          navigate('/adminhome');
+        } else if (roleName === 'ROLE_USER') {
+          navigate('/courses');
+        } else {
+          throw new Error('Unknown user role');
+        }
       } else {
-        throw new Error('Unknown user role');
+        throw new Error('No roles assigned to user');
       }
-  
+
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
     }
-  };  
+  };
 
   const goToRegister = () => {
     navigate('/register');

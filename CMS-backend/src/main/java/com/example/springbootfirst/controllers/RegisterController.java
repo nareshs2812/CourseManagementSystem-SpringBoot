@@ -80,7 +80,7 @@ public ResponseEntity<?> login(@RequestBody LoginDetails request) {
         RegisterDetails user = registerService.findByUserName(request.getUserName());
 
         // Return full login response
-        LoginResponse response = new LoginResponse(Long.valueOf(user.getEmpId()), user.getUserName(), token);
+        LoginResponse response = new LoginResponse(Long.valueOf(user.getEmpId()), user.getUserName(), token,user.getRoles());
         return ResponseEntity.ok(response);
 
     } catch (AuthenticationException e) {

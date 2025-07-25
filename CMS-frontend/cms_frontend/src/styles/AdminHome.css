@@ -1,0 +1,43 @@
+.admin-home-container {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 2rem;
+}
+
+.admin-dashboard {
+  background-color: white;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.admin-welcome {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.admin-welcome h2 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.admin-welcome p {
+  color: #7f8c8d;
+}
+
+.admin-actions {
+  text-align: center;
+}
+
+.create-course-btn {
+  margin: 1rem 0;
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.create-course-btn:hover {
+  transform: translateY(-2px);
+}
