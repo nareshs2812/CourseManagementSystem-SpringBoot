@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import AdminHeader from './AdminHeader';
-import '../styles/AdminCourses.css'; // CSS for admin course listing
+import '../styles/AdminCourses.css';
 import { toast } from 'react-toastify';
 
 const AdminCourses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [editingCourse, setEditingCourse] = useState(null);
+  const [updatedCourse, setUpdatedCourse] = useState({});
   const userId = localStorage.getItem('userId');
   const token = localStorage.getItem('token');
 
@@ -20,9 +22,7 @@ const AdminCourses = () => {
       },
     })
       .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`Error: ${response.status}`);
         return response.json();
       })
       .then((data) => {
@@ -45,18 +45,50 @@ const AdminCourses = () => {
       },
     })
       .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Error deleting: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`Error deleting: ${response.status}`);
         return response.text();
       })
-      .then((message) => {
-        toast.success(message);
+      .then(() => {
+        toast.success("Course deleted successfully!");
         fetchCourses();
       })
       .catch((err) => {
         console.error('Delete error:', err);
         toast.error("Failed to delete course");
+      });
+  };
+
+  const handleEditClick = (course) => {
+    setEditingCourse(course.courseId);
+    setUpdatedCourse({ ...course }); // Pre-fill with current data
+  };
+
+  const handleUpdateChange = (e) => {
+    const { name, value } = e.target;
+    setUpdatedCourse((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleUpdateSubmit = () => {
+    fetch(`http://localhost:8080/courses/${editingCourse}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedCourse),
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error(`Update failed: ${response.status}`);
+        return response.json();
+      })
+      .then(() => {
+        toast.success("Course updated successfully!");
+        setEditingCourse(null);
+        fetchCourses();
+      })
+      .catch((err) => {
+        console.error('Update error:', err);
+        toast.error("Failed to update course");
       });
   };
 
@@ -66,7 +98,6 @@ const AdminCourses = () => {
       setLoading(false);
       return;
     }
-
     fetchCourses();
   }, [userId, token]);
 
@@ -85,17 +116,53 @@ const AdminCourses = () => {
         ) : (
           <div className="admin-course-grid">
             {courses.map((course) => (
-              <div className="admin-course-card" key={course.id}>
-                <h3>{course.title}</h3>
-                <p><strong>Duration:</strong> {course.durationInHours} hrs</p>
-                <p><strong>Price:</strong> ₹{course.coursePrice}</p>
-                <p><strong>Description:</strong> {course.description}</p>
-                <button
-                  className="delete-course-button"
-                  onClick={() => handleDelete(course.id)}
-                >
-                  Delete
-                </button>
+              <div className="admin-course-card" key={course.courseId}>
+                {editingCourse === course.courseId ? (
+                  <>
+                    <input
+                      type="text"
+                      name="title"
+                      value={updatedCourse.title}
+                      onChange={handleUpdateChange}
+                      placeholder="Title"
+                    />
+                    <input
+                      type="number"
+                      name="durationInHours"
+                      value={updatedCourse.durationInHours}
+                      onChange={handleUpdateChange}
+                      placeholder="Duration"
+                    />
+                    <input
+                      type="number"
+                      name="coursePrice"
+                      value={updatedCourse.coursePrice}
+                      onChange={handleUpdateChange}
+                      placeholder="Price"
+                    />
+                    <textarea
+                      name="description"
+                      value={updatedCourse.description}
+                      onChange={handleUpdateChange}
+                      placeholder="Description"
+                    />
+                    <div className="button-row">
+                      <button onClick={handleUpdateSubmit}>Save</button>
+                      <button onClick={() => setEditingCourse(null)}>Cancel</button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <h3>{course.title}</h3>
+                    <p><strong>Duration:</strong> {course.durationInHours} hrs</p>
+                    <p><strong>Price:</strong> ₹{course.coursePrice}</p>
+                    <p><strong>Description:</strong> {course.description}</p>
+                    <div className="button-row">
+                      <button className="delete-course-button" onClick={() => handleDelete(course.courseId)}>Delete</button>
+                      <button className="update-course-button" onClick={() => handleEditClick(course)}>Update</button>
+                    </div>
+                  </>
+                )}
               </div>
             ))}
           </div>
