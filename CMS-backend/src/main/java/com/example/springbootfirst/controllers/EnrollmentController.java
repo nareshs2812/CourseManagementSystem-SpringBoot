@@ -38,4 +38,9 @@ public class EnrollmentController {
         List<Enrollment> enrollments = enrollmentService.getAllEnrollments();
         return ResponseEntity.ok(enrollments);
     }
+
+     @GetMapping("/count/{courseId}")
+    public int countEnrollments(@PathVariable Long courseId) {
+        return enrollmentService.countEnrollmentsByCourseId(courseId);
+    }
 }

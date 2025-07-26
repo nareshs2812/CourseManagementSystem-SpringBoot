@@ -9,31 +9,51 @@ const AdminCourses = () => {
   const [error, setError] = useState('');
   const [editingCourse, setEditingCourse] = useState(null);
   const [updatedCourse, setUpdatedCourse] = useState({});
+  const [enrollmentCounts, setEnrollmentCounts] = useState({});
+
   const userId = localStorage.getItem('userId');
   const token = localStorage.getItem('token');
 
-  const fetchCourses = () => {
-    setLoading(true);
-    fetch(`http://localhost:8080/courses/createdBy/${userId}`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => {
-        if (!response.ok) throw new Error(`Error: ${response.status}`);
-        return response.json();
-      })
-      .then((data) => {
-        setCourses(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error('Fetch error:', err);
-        setError(err.message);
-        setLoading(false);
+  const fetchEnrollmentCount = async (courseId) => {
+    try {
+      const response = await fetch(`http://localhost:8080/enrollments/count/${courseId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
       });
+      if (!response.ok) throw new Error('Failed to fetch enrollment count');
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching enrollment count:', error);
+      return 0;
+    }
+  };
+
+  const fetchCourses = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`http://localhost:8080/courses/createdBy/${userId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) throw new Error(`Error: ${response.status}`);
+      const data = await response.json();
+      setCourses(data);
+
+      const countMap = {};
+      for (let course of data) {
+        const count = await fetchEnrollmentCount(course.courseId);
+        countMap[course.courseId] = count;
+      }
+      setEnrollmentCounts(countMap);
+    } catch (err) {
+      console.error('Fetch error:', err);
+      setError(err.message);
+    }
+    setLoading(false);
   };
 
   const handleDelete = (courseId) => {
@@ -60,7 +80,7 @@ const AdminCourses = () => {
 
   const handleEditClick = (course) => {
     setEditingCourse(course.courseId);
-    setUpdatedCourse({ ...course }); // Pre-fill with current data
+    setUpdatedCourse({ ...course });
   };
 
   const handleUpdateChange = (e) => {
@@ -157,6 +177,7 @@ const AdminCourses = () => {
                     <p><strong>Duration:</strong> {course.durationInHours} hrs</p>
                     <p><strong>Price:</strong> ₹{course.coursePrice}</p>
                     <p><strong>Description:</strong> {course.description}</p>
+                    <p><strong>Enrolled Users:</strong> {enrollmentCounts[course.courseId] || 0}</p>
                     <div className="button-row">
                       <button className="delete-course-button" onClick={() => handleDelete(course.courseId)}>Delete</button>
                       <button className="update-course-button" onClick={() => handleEditClick(course)}>Update</button>

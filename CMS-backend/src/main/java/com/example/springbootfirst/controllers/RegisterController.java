@@ -41,27 +41,6 @@ public class RegisterController {
         return ResponseEntity.ok(response);
     }
 
-    // @PostMapping("/login")
-    // public ResponseEntity<?> login(@RequestBody LoginDetails request) {
-    //     try {
-    //         Authentication authentication = authenticationManager.authenticate(
-    //                 new UsernamePasswordAuthenticationToken(
-    //                         request.getUserName(),
-    //                         request.getPassword()
-    //                 )
-    //         );
-
-    //         // Generate JWT token
-    //         String token = jwtTokenProvider.generateToken(authentication);
-
-    //         // Return token as JSON
-    //         return ResponseEntity.ok(Collections.singletonMap("token", token));
-
-    //     } catch (AuthenticationException e) {
-    //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-    //                 .body(Collections.singletonMap("error", "Invalid username or password"));
-    //     }
-    // }
 
     @PostMapping("/login")
 public ResponseEntity<?> login(@RequestBody LoginDetails request) {
@@ -73,13 +52,12 @@ public ResponseEntity<?> login(@RequestBody LoginDetails request) {
                 )
         );
 
-        // Generate JWT token
         String token = jwtTokenProvider.generateToken(authentication);
 
-        // Fetch user from DB
+
         RegisterDetails user = registerService.findByUserName(request.getUserName());
 
-        // Return full login response
+
         LoginResponse response = new LoginResponse(Long.valueOf(user.getEmpId()), user.getUserName(), token,user.getRoles());
         return ResponseEntity.ok(response);
 

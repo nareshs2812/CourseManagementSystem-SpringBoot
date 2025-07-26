@@ -58,6 +58,10 @@ public class EnrollmentService {
 
     public List<Enrollment> getAllEnrollments() {
     return enrollmentRepository.findAll();
-}
+    }
+
+    public int countEnrollmentsByCourseId(Long courseId) {
+    return enrollmentRepository.countByCourseId(courseId);
+    }
 
 }

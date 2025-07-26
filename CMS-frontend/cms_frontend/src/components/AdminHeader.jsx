@@ -15,26 +15,14 @@ const AdminHeader = () => {
     <nav className="admin-navbar">
       <div className="admin-nav-logo">
         <i className="fas fa-crown admin-logo-icon"></i>
-        <span>Admin Portal</span>
+        <span>CourseSphere</span>
       </div>
       
       <div className="admin-nav-links">
-        <a href="/adminhome" className="active">Dashboard</a>
-        <a href="/admincourse">Courses</a>
-        <a href="/users">Users</a>
-        <a href="/settings">Settings</a>
-        <a href="/reports">Reports</a>
-      </div>
-
-      <div className="admin-nav-actions">
-        <div className="admin-profile">
-          <i className="fas fa-user-circle"></i>
-          <span>Admin</span>
-        </div>
-        <button className="admin-logout-btn" onClick={handleLogout}>
-          <i className="fas fa-sign-out-alt"></i>
-          Logout
-        </button>
+        <a href="/adminhome" class="kar">Dashboard</a>
+        <a href="/admincourse" class="kar">Courses</a>
+        <a href="/profile" class="kar">Profile</a>
+        <a href="/" class="kar">Logout</a>
       </div>
     </nav>
   );
