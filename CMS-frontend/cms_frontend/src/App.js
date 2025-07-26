@@ -12,6 +12,8 @@ import AdminHeader from './components/AdminHeader';
 import AdminCourse from './components/AdminCourse';
 import AddCourse from './components/AddCourse';
 import MyProfile from './components/MyProfile';
+import CourseDetails from './components/CourseDetails';
+import ContactPage from './components/ContactPage';
 
 
 function App() {
@@ -29,7 +31,9 @@ function App() {
         <Route path="/adminhome" element={<AdminHome />} />
         <Route path="/admincourse" element={<AdminCourse />} />
         <Route path="/addcourse" element={<AddCourse />} />
+        <Route path="/course/:courseId" element={<CourseDetails />} />
         <Route path="/profile" element={<MyProfile />} />
+        <Route path="/contact" element={<ContactPage />} />
       </Routes>
     </Router>
   );

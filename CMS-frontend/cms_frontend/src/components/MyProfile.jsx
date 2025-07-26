@@ -14,11 +14,11 @@ const MyProfile = () => {
 
         setUser(storedUser);
 
-        if (storedUser.role === 'ROLE_ADMIN') {
-          const response = await axios.get(`http://localhost:8080/courses/createdBy/${storedUser.id}`);
-          setCourseCount(response.data.length);
-        } else if (storedUser.role === 'ROLE_USER') {
+        if (storedUser.role === 'ROLE_USER') {
           const response = await axios.get(`http://localhost:8080/enrollments/user/${storedUser.id}`);
+          setCourseCount(response.data.length);
+        } else if (storedUser.role === 'ROLE_ADMIN') {
+          const response = await axios.get(`http://localhost:8080/courses/admin/${storedUser.id}`);
           setCourseCount(response.data.length);
         }
       } catch (error) {

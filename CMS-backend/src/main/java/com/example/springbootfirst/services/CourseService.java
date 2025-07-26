@@ -44,4 +44,10 @@ public class CourseService {
             return courseRepository.save(course);
         }).orElseThrow(() -> new RuntimeException("Course not found with id " + id));
     }
+
+    public long countCoursesByInstructorId(Long instructorId) {
+    return courseRepository.countByInstructorId(instructorId);
+    }
+    
+
 }

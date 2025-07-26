@@ -89,7 +89,13 @@ const CourseListingPage = () => {
                 <p><strong>Duration:</strong> {course.durationInHours} hrs</p>
                 <p><strong>Price:</strong> {course.coursePrice}</p>
                 <div className="course-actions">
-                  <button className="course-btn">View Details</button>
+                <button
+                      className="course-btn view-details"
+                      onClick={() => navigate(`/course/${course.courseId}`)}
+                    >
+                      View Details
+                    </button>
+
                   <button 
                     className="course-btn enroll-btn" 
                     onClick={() => handleEnroll(course.courseId)}
@@ -100,6 +106,7 @@ const CourseListingPage = () => {
                 </div>
               </div>
             ))}
+
           </div>
         )}
       </div>
