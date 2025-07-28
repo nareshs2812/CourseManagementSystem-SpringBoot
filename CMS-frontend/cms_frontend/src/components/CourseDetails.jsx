@@ -82,6 +82,13 @@ const CourseDetails = () => {
             >
               Enroll Now
             </button>
+            <button
+              className="course-btn enroll-btn"
+              onClick={() => navigate('/courses')}
+              disabled={!userId}
+            >
+              Back
+            </button>
           </div>
         ) : (
           <p>Course not found.</p>

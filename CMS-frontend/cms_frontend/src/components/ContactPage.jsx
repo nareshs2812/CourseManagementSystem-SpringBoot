@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import '../styles/ContactPage.css';
+import emailjs from 'emailjs-com';
 import { toast } from 'react-toastify';
+import '../styles/ContactPage.css';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -10,82 +11,46 @@ const ContactPage = () => {
     message: ''
   });
 
-  const [loading, setLoading] = useState(false);
-
   const handleChange = (e) => {
-    setFormData({ 
-      ...formData, 
-      [e.target.name]: e.target.value 
-    });
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
 
-    try {
-      const response = await fetch('http://localhost:8080/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
-      
-      const result = await response.json();
-
-      if (response.ok) {
-        toast.success('Message sent successfully!');
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      } else {
-        toast.error(result.message || 'Failed to send message');
-      }
-    } catch (error) {
-      toast.error('Error sending message');
-    } finally {
-      setLoading(false);
-    }
+    emailjs.send(
+      'service_0t2lpwk',        // from EmailJS dashboard
+      'your_template_id',       // from EmailJS dashboard
+      {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message
+      },
+      'your_user_id'            // from EmailJS account
+    )
+    .then(() => {
+      toast.success('Email sent!');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    })
+    .catch((error) => {
+      toast.error('Failed to send email');
+      console.error('EmailJS Error:', error);
+    });
   };
 
   return (
     <div className="contact-page">
       <h2>Contact Us</h2>
       <form className="contact-form" onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          name="name" 
-          placeholder="Your Name" 
-          value={formData.name} 
-          onChange={handleChange} 
-          required 
-        />
-        <input 
-          type="email" 
-          name="email" 
-          placeholder="Your Email" 
-          value={formData.email} 
-          onChange={handleChange} 
-          required 
-        />
-        <input 
-          type="text" 
-          name="subject" 
-          placeholder="Subject" 
-          value={formData.subject} 
-          onChange={handleChange} 
-          required 
-        />
-        <textarea 
-          name="message" 
-          placeholder="Your Message" 
-          value={formData.message} 
-          onChange={handleChange} 
-          rows="5" 
-          required 
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? 'Sending...' : 'Send Message'}
-        </button>
+        <input type="text" name="name" placeholder="Your Name" value={formData.name} onChange={handleChange} required />
+        <input type="email" name="email" placeholder="Your Email" value={formData.email} onChange={handleChange} required />
+        <input type="text" name="subject" placeholder="Subject" value={formData.subject} onChange={handleChange} required />
+        <textarea name="message" placeholder="Your Message" value={formData.message} onChange={handleChange} rows="5" required />
+        <button type="submit">Send Message</button>
       </form>
     </div>
   );

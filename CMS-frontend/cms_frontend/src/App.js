@@ -11,7 +11,7 @@ import AdminHome from './components/AdminHome';
 import AdminHeader from './components/AdminHeader';
 import AdminCourse from './components/AdminCourse';
 import AddCourse from './components/AddCourse';
-import MyProfile from './components/MyProfile';
+import MyProfile from './components/MyProfileAdmin';
 import CourseDetails from './components/CourseDetails';
 import ContactPage from './components/ContactPage';
 
@@ -32,7 +32,7 @@ function App() {
         <Route path="/admincourse" element={<AdminCourse />} />
         <Route path="/addcourse" element={<AddCourse />} />
         <Route path="/course/:courseId" element={<CourseDetails />} />
-        <Route path="/profile" element={<MyProfile />} />
+        <Route path="/profileAdmin" element={<MyProfile />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
     </Router>

@@ -58,7 +58,7 @@ public ResponseEntity<?> login(@RequestBody LoginDetails request) {
         RegisterDetails user = registerService.findByUserName(request.getUserName());
 
 
-        LoginResponse response = new LoginResponse(Long.valueOf(user.getEmpId()), user.getUserName(), token,user.getRoles());
+        LoginResponse response = new LoginResponse(Long.valueOf(user.getEmpId()), user.getUserName(), token,user.getRoles(),user.getEmail());
         return ResponseEntity.ok(response);
 
     } catch (AuthenticationException e) {

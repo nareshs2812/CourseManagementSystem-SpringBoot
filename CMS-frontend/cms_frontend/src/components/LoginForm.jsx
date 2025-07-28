@@ -17,6 +17,7 @@ const LoginForm = () => {
     e.preventDefault();
     setLoading(true);
     setError('');
+
     try {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
@@ -31,25 +32,32 @@ const LoginForm = () => {
         throw new Error(data?.error || data || 'Login failed');
       }
 
-      localStorage.setItem('userId', data.userId);
-      localStorage.setItem('userName', data.userName);
-      if (data.token) localStorage.setItem('token', data.token);
-
       const roleName = data.roles && Array.isArray(data.roles) && data.roles.length > 0
         ? data.roles[0].name
         : null;
 
-      if (roleName) {
-        localStorage.setItem('role', roleName);
-        if (roleName === 'ROLE_ADMIN') {
-          navigate('/adminhome');
-        } else if (roleName === 'ROLE_USER') {
-          navigate('/courses');
-        } else {
-          throw new Error('Unknown user role');
-        }
-      } else {
+      if (!roleName) {
         throw new Error('No roles assigned to user');
+      }
+
+      // Store full user object
+      const user = {
+        id: data.userId,
+        userName: data.userName,
+        email: data.email,
+        role: roleName
+      };
+
+      localStorage.setItem('user', JSON.stringify(user));
+      if (data.token) localStorage.setItem('token', data.token);
+
+      // Redirect based on role
+      if (roleName === 'ROLE_ADMIN') {
+        navigate('/adminhome');
+      } else if (roleName === 'ROLE_USER') {
+        navigate('/courses');
+      } else {
+        throw new Error('Unknown user role');
       }
 
     } catch (err) {

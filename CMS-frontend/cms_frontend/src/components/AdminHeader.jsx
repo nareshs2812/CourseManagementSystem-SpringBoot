@@ -21,7 +21,7 @@ const AdminHeader = () => {
       <div className="admin-nav-links">
         <a href="/adminhome" class="kar">Dashboard</a>
         <a href="/admincourse" class="kar">Courses</a>
-        <a href="/profile" class="kar">Profile</a>
+        <a href="/profileAdmin" class="kar">Profile</a>
         <a href="/" class="kar">Logout</a>
       </div>
     </nav>
