@@ -73,33 +73,6 @@ const AdminHome = () => {
               </Button>
             </div>
 
-            {/* <div className="admin-stats">
-              <div className="stat-card">
-                <FontAwesomeIcon icon={faBookOpen} className="stat-icon" />
-                <h3>Total Courses</h3>
-                <div className="stat-value">48</div>
-                <div className="stat-label">Active Courses</div>
-              </div>
-              <div className="stat-card">
-                <FontAwesomeIcon icon={faUserGraduate} className="stat-icon" />
-                <h3>Registered Users</h3>
-                <div className="stat-value">1,245</div>
-                <div className="stat-label">Active Users</div>
-              </div>
-              <div className="stat-card">
-                <FontAwesomeIcon icon={faChartLine} className="stat-icon" />
-                <h3>Enrollments</h3>
-                <div className="stat-value">3,456</div>
-                <div className="stat-label">Active Enrollments</div>
-              </div>
-              <div className="stat-card">
-                <FontAwesomeIcon icon={faMoneyBillWave} className="stat-icon" />
-                <h3>Revenue</h3>
-                <div className="stat-value">₹45,678</div>
-                <div className="stat-label">This Month</div>
-              </div>
-            </div> */}
-
             <div className="course-categories">
               <h2>Course Categories</h2>
               <div className="category-grid">

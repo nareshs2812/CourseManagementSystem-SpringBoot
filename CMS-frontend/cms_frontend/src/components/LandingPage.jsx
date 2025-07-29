@@ -8,11 +8,10 @@ const LandingPage = () => {
       <nav className="navbar">
         <div className="nav-logo">CourseSphere</div>
         <div className="nav-links">
-          {/* <a href="/" className="kar">Home</a> */}
           <a href="/login" className="kar">Login</a>
           <a href="/register" className="kar">Register</a>
           <a href="/about" className="kar">About US</a>
-          <a href="#contact" className="kar">Contact</a>
+          <a href="/contact" className="kar">Contact</a>
         </div>
       </nav>
 

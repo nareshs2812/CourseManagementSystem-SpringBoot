@@ -8,9 +8,10 @@ const CourseListingPage = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
   const [userId, setUserId] = useState(null);
   const [enrolling, setEnrolling] = useState(false);
+  const navigate = useNavigate();
 
   const handleEnroll = async (courseId) => {
     if (!userId) {
@@ -51,7 +52,7 @@ const CourseListingPage = () => {
     if (storedUserId) {
       setUserId(storedUserId);
     }
-    
+
     fetch('http://localhost:8080/courses')
       .then(response => {
         if (!response.ok) {
@@ -70,10 +71,25 @@ const CourseListingPage = () => {
       });
   }, []);
 
+  // Filter courses based on search term (safe toLowerCase check)
+  const filteredCourses = courses.filter(course =>
+    (course.title || '').toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
       <Header />
       <div className="course-container">
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search courses..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+          />
+        </div>
+
         <h2 className="course-heading">All Courses</h2>
 
         {loading ? (
@@ -82,31 +98,29 @@ const CourseListingPage = () => {
           <p className="course-error">Error: {error}</p>
         ) : (
           <div className="course-grid">
-            {courses.map(course => (
+            {filteredCourses.map(course => (
               <div className="course-card" key={course.courseId}>
                 <h3>{course.title}</h3>
                 <p><strong>Instructor:</strong> {course.instructorName}</p>
                 <p><strong>Duration:</strong> {course.durationInHours} hrs</p>
                 <p><strong>Price:</strong> {course.coursePrice}</p>
                 <div className="course-actions">
-                <button
-                      className="course-btn view-details"
-                      onClick={() => navigate(`/course/${course.courseId}`)}
-                    >
-                      View Details
-                    </button>
-
-                  <button 
-                    className="course-btn enroll-btn" 
-                    onClick={() => handleEnroll(course.courseId)}
-                    disabled={!userId}
+                  <button
+                    className="course-btn view-details"
+                    onClick={() => navigate(`/course/${course.courseId}`)}
                   >
-                    Enroll Now
+                    View Details
+                  </button>
+                  <button
+                    className="course-btn enroll-btn"
+                    onClick={() => handleEnroll(course.courseId)}
+                    disabled={!userId || enrolling}
+                  >
+                    {enrolling ? 'Enrolling...' : 'Enroll Now'}
                   </button>
                 </div>
               </div>
             ))}
-
           </div>
         )}
       </div>
