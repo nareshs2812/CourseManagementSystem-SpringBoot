@@ -40,7 +40,6 @@ const LoginForm = () => {
         throw new Error('No roles assigned to user');
       }
 
-      // Store full user object
       const user = {
         id: data.userId,
         userName: data.userName,
@@ -51,7 +50,6 @@ const LoginForm = () => {
       localStorage.setItem('user', JSON.stringify(user));
       if (data.token) localStorage.setItem('token', data.token);
 
-      // Redirect based on role
       if (roleName === 'ROLE_ADMIN') {
         navigate('/adminhome');
       } else if (roleName === 'ROLE_USER') {

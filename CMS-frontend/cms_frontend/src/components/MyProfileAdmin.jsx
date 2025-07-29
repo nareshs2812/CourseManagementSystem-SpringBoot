@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/MyProfileAdmin.css'; // Import the CSS file
+import '../styles/MyProfileAdmin.css';
 import AdminHeader from './AdminHeader';
 
 function MyProfileAdmin() {

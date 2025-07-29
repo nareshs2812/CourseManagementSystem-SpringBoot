@@ -31,8 +31,6 @@ public class EnrollmentController {
     public String deleteEnrollment(@PathVariable Long enrollmentId) {
         return enrollmentService.deleteEnrollmentById(enrollmentId);
     }
-
-    // ✅ Correct mapping for retrieving all enrollments
     @GetMapping
     public ResponseEntity<List<Enrollment>> getAllEnrollments() {
         List<Enrollment> enrollments = enrollmentService.getAllEnrollments();

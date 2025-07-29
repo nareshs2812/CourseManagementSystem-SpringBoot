@@ -34,7 +34,7 @@ const AddCourse = () => {
       ...course,
       durationInHours: parseInt(course.durationInHours),
       coursePrice: parseFloat(course.coursePrice),
-      instructorId: parseInt(userId) // attach instructorId from localStorage
+      instructorId: parseInt(userId)
     };
 
     try {

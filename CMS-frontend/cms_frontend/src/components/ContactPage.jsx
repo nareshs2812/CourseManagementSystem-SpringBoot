@@ -13,7 +13,6 @@ function ContactPage() {
 
   const [loading, setLoading] = useState(false);
 
-  // Handle input changes
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -21,7 +20,6 @@ function ContactPage() {
     });
   };
 
-  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, email, subject, message } = formData;
@@ -35,15 +33,14 @@ function ContactPage() {
 
     try {
       await emailjs.send(
-        'service_0t2lpwk',    // ✅ Your EmailJS service ID
-        'template_ygkrlwx',   // ✅ Your EmailJS template ID
+        'service_0t2lpwk',    
+        'template_ygkrlwx',  
         {
-          title: subject,     // Matches {{title}}
-          name: name,         // Matches {{name}}
-          email: email,       // Matches {{email}}
-          message: message    // Matches {{message}}
+          title: subject,    
+          name: name,     
+          email: email,              message: message``
         },
-        'UrM3oMXghg5fWXezm'   // ✅ Your EmailJS Public Key
+        'UrM3oMXghg5fWXezm'
       );
 
       toast.success('Message sent successfully!');

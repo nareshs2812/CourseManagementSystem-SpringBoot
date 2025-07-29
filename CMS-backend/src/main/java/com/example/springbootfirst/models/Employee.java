@@ -15,18 +15,15 @@ public class Employee {
     private String name;
     private String job;
 
-    // No-arg constructor
     public Employee() {
     }
 
-    // All-args constructor
     public Employee(int empID, String name, String job) {
         this.empID = empID;
         this.name = name;
         this.job = job;
     }
 
-    // Getters and Setters
     public int getEmpID() {
         return empID;
     }
@@ -51,7 +48,6 @@ public class Employee {
         this.job = job;
     }
 
-    // toString method (optional)
     @Override
     public String toString() {
         return "Employee{" +

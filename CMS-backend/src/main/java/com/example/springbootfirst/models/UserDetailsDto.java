@@ -9,11 +9,9 @@ public class UserDetailsDto {
   private String password;
   private Set<String> roleNames;
 
-  // No-arg constructor
   public UserDetailsDto() {
   }
 
-  // All-args constructor
   public UserDetailsDto(String name, String userName, String email, String password, Set<String> roleNames) {
     this.name = name;
     this.userName = userName;
@@ -22,7 +20,7 @@ public class UserDetailsDto {
     this.roleNames = roleNames;
   }
 
-  // Getters and Setters
+
 
   public String getName() {
     return name;
@@ -64,7 +62,6 @@ public class UserDetailsDto {
     this.roleNames = roleNames;
   }
 
-  // Optional: toString method
   @Override
   public String toString() {
     return "UserDetailsDto{" +

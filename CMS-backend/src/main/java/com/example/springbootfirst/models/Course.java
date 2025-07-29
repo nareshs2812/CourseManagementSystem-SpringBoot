@@ -44,7 +44,6 @@ public class Course {
         this.instructorId = instructorId;
     }
 
-    // Getters and Setters
     public Long getCourseId() {
         return courseId;
     }

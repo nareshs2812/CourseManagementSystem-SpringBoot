@@ -71,7 +71,6 @@ const CourseListingPage = () => {
       });
   }, []);
 
-  // Filter courses based on search term (safe toLowerCase check)
   const filteredCourses = courses.filter(course =>
     (course.title || '').toLowerCase().includes(searchTerm.toLowerCase())
   );

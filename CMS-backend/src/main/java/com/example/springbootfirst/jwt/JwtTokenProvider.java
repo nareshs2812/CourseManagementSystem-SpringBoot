@@ -23,7 +23,6 @@ public class JwtTokenProvider {
     private long jwtExpirationMilliSeconds;
 
     private Key secretKey() {
-        // ✅ Use plain string secret with UTF-8 encoding (NOT Base64)
         return new SecretKeySpec(jwtSecret.getBytes(StandardCharsets.UTF_8), SignatureAlgorithm.HS256.getJcaName());
     }
 
@@ -55,7 +54,7 @@ public class JwtTokenProvider {
                     .parseClaimsJws(token);
             return true;
         } catch (JwtException | IllegalArgumentException e) {
-            e.printStackTrace(); // Log error
+            e.printStackTrace();
         }
         return false;
     }

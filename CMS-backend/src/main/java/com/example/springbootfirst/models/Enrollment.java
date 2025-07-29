@@ -12,7 +12,7 @@ public class Enrollment {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnore // Avoid infinite recursion in JSON if RegisterDetails has a list of enrollments
+    @JsonIgnore
     private RegisterDetails user;
 
     @ManyToOne

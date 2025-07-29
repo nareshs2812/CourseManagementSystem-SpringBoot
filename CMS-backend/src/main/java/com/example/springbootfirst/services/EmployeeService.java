@@ -40,7 +40,6 @@ public class EmployeeService {
                 .orElseThrow(() -> new RuntimeException("Employee not found with ID: " + id));
         existing.setName(updated.getName());
         existing.setJob(updated.getJob());
-        // ✅ Removed email
         empRepo.save(existing);
         return "Employee with ID " + id + " updated successfully.";
     }

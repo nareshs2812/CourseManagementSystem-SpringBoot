@@ -6,7 +6,6 @@ const AdminHeader = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Add logout logic here
     localStorage.removeItem('token');
     navigate('/login');
   };
