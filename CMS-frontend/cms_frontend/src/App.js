@@ -14,6 +14,7 @@ import AddCourse from './components/AddCourse';
 import MyProfile from './components/MyProfileAdmin';
 import CourseDetails from './components/CourseDetails';
 import ContactPage from './components/ContactPage';
+import Profile from './components/Profile';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path="/course/:courseId" element={<CourseDetails />} />
         <Route path="/profileAdmin" element={<MyProfile />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );
